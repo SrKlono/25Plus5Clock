@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LightRays from "./components/LightRays";
 import {
 	ArrowLeftCircleIcon,
@@ -9,6 +9,10 @@ import {
 } from "lucide-react";
 
 const App = () => {
+	const [breakLength, setBreakLength] = useState(5);
+	const [sessionLength, setSessionLength] = useState(25);
+	const [paused, setPaused] = useState(false);
+
 	return (
 		<div>
 			<div style={{ width: "100%", height: "600px", position: "fixed" }}>
@@ -30,25 +34,35 @@ const App = () => {
 				<div className="px-12 py-8 flex flex-col gap-6 rounded-2xl backdrop-filter backdrop-blur-2xl border-2 border-gray-100/15">
 					<div className="flex justify-center gap-6 [&>*]:text-2xl">
 						<div className="text-center">
-							<h4>Break Length</h4>
+							<h4
+								id="break-label"
+								className=" text-white/30 font-semibold"
+							>
+								Break Length
+							</h4>
 							<div className="flex justify-center items-center gap-2">
-								<button>
+								<button id="break-decrement" className="btn-sm">
 									<ArrowLeftCircleIcon className="size-7" />
 								</button>
-								<span>5</span>
-								<button>
+								<span id="break-length">{breakLength}</span>
+								<button id="break-increment" className="btn-sm">
 									<ArrowRightCircleIcon className="size-7" />
 								</button>
 							</div>
 						</div>
 						<div className="text-center">
-							<h4>Session Length</h4>
+							<h4
+								id="session-label"
+								className=" text-white/30 font-semibold"
+							>
+								Session Length
+							</h4>
 							<div className="flex justify-center items-center gap-2">
-								<button>
+								<button id="session-decrement" className="btn-sm">
 									<ArrowLeftCircleIcon className="size-7" />
 								</button>
-								<span>25</span>
-								<button>
+								<span id="session-length">{sessionLength}</span>
+								<button id="session-increment" className="btn-sm">
 									<ArrowRightCircleIcon className="size-7" />
 								</button>
 							</div>
@@ -56,20 +70,31 @@ const App = () => {
 					</div>
 
 					<div className="text-center rounded-2xl p-4 bg-gray-100/1 border-2 border-gray-100/15 ">
-						<h4 className="text-3xl">Session</h4>
-						<h2 className="text-8xl">25:00</h2>
+						<h4
+							id="timer-label"
+							className="text-3xl text-white/30 font-bold"
+						>
+							Session
+						</h4>
+						<h2 id="time-left" className="text-8xl">
+							25:00
+						</h2>
 					</div>
 
 					<div className="flex gap-2 justify-center">
-						<button className="transition-transform hover:scale-120">
-							<PlayIcon className="size-10" />
+						<button
+							id="start_stop"
+							className="btn"
+							onClick={() => setPaused(!paused)}
+						>
+							{paused ? (
+								<PlayIcon className="size-10" />
+							) : (
+								<PauseIcon className="size-10" />
+							)}
 						</button>
 
-						<button className="transition-transform hover:scale-120">
-							<PauseIcon className="size-10" />
-						</button>
-
-						<button className="transition-transform hover:scale-120">
+						<button id="reset" className="btn">
 							<RewindIcon className="size-10" />
 						</button>
 					</div>

@@ -9,3 +9,17 @@ html {
 button:hover {
 	cursor: pointer;
 }
+
+@utility btn {
+    @apply hover:scale-120;
+    @apply active:scale-90;
+	@apply duration-200;
+    @apply transition-transform;
+}
+
+@utility btn-sm {
+    @apply hover:scale-110;
+    @apply active:scale-95;
+	@apply duration-75;
+    @apply transition-transform;
+}
